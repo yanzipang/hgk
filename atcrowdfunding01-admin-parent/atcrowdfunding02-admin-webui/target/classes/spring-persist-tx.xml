@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			    http://www.springframework.org/schema/beans/spring-beans.xsd
+			    http://www.springframework.org/schema/context
+			    http://www.springframework.org/schema/context/spring-context.xsd
+			    http://www.springframework.org/schema/aop
+			    http://www.springframework.org/schema/aop/spring-aop.xsd
+			    http://www.springframework.org/schema/tx
+			    http://www.springframework.org/schema/tx/spring-tx.xsd
+			    http://www.springframework.org/schema/mvc
+			    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--配置自动扫描的包：主要是为了把Service扫描到IOC容器中-->
+    <context:component-scan base-package="com.atguigu.crowd.service"></context:component-scan>
+    <!--配置事务管理器-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--配置事务切面-->
+    <aop:config>
+        <!--
+            execution(public String com.atguigu.crowd.service.AdminService.saveAdmin(Admin))
+        -->
+        <!--考虑到后面要整合SpringSercurity，避免把UserDDetailService加入事务控制，所以让切入点表达式定位到ServiceImpl-->
+        <aop:pointcut id="txPointcut" expression="execution(* *..*ServiceImpl.*(..))"/>
+        <!--将切入点表达式和事务通知关联起来-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"></aop:advisor>
+    </aop:config>
+    <!--配置事务通知-->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <!--配置事务属性-->
+        <tx:attributes>
+            <!--查询方法：配置只读属性，让数据库知道这是一个查询操作，能够进行一定优化-->
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="count*" read-only="true"/>
+            <!--增删改方法：配置事务传播行为，回滚异常-->
+            <!--
+                propagation属性：
+                    REQUIRED：默认值，表示当前方法必须工作在事务中，如果当前线程上没有已经开启的事务，自己开新事务，如果已经有了，就使用当前事务。
+                        顾虑：用别人的事务有可能被回滚（自己本身没有出错）
+                    REQUIRES_NEW:推荐使用的值，不管当前线程有没有事务，都开启新事务，并在自己开启的新事务中运行
+                        好处：不受其他事务影响
+            -->
+            <!--
+                rollback-for：配置事务方法对什么样的异常回滚
+                    默认：运行时异常回滚
+                    建议：编译、运行时异常都回滚:java.lang.Exception
+            -->
+            <tx:method name="save*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>
+            <tx:method name="remove*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>
+            <tx:method name="update*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>
+        </tx:attributes>
+    </tx:advice>
+</beans>

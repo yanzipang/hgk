@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+  <display-name>Archetype Created Web Application</display-name>
+  <!--配置ContextLoaderListener-->
+  <!--加载配置文件-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-persist-*.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!--配置CharacterEncodingFilter-->
+  <!--字符集过滤器-->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <!--指定字符集-->
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <!--强制请求设置字符集-->
+    <init-param>
+      <param-name>forceRequestEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <!--强制响应设置字符集-->
+    <init-param>
+      <param-name>forceResponseEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <!--这个Filter执行的顺序要在其他所有Filter的前面-->
+  <!--
+    解决POST请求的字符乱码问题。需要注意的是：在 web.xml中存在多个Filter时，让这个Filter作为过滤器链中的第一个Filter。
+    request.setCharacterEncoding(encoding)要求必须在所有request.getParameter(xxx)操作前面
+    response.setCharacterEncoding(encoding)要求必须在所有response.getWriter()操作前面
+    不满足这个顺序要求字符集设定无法生效
+  -->
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--配置前端控制器-->
+  <servlet>
+    <servlet-name>springDispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-web-mvc.xml</param-value>
+    </init-param>
+    <!--Servlet默认生命周期中，创建对象是在第一次接收到请求时。
+          而DispatcherServlet创建对象后有大量的“框架初始化”工作，不适合在第一次接收请求时来做
+          设置load-on-startup就是为了让DispatcherServlet在Web应用启动时创建对象、初始化
+    -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springDispatcherServlet</servlet-name>
+    <!--url-pattern配置方式一：/  表示过滤所有请求-->
+    <!--  <url-pattern>/</url-pattern> -->
+
+    <!--url-pattern配置方式二：配置请求扩展名
+            优点1：css,js,png等静态资源完全不经过SpringMVC，不需要特殊处理
+            优点2:可以实现伪静态效果，表面上看起来是访问一个html文件这样的静态资源，但实际上是经过java代码运算的结果
+              伪静态的作用：
+                1.给黑客入侵增加难度
+                2.有利于SEO的优化（就是让百度，谷歌等搜索引擎更容易找到我们的项目）
+                伪静态的缺点：不符合RESTFul风格
+    -->
+    <url-pattern>*.html</url-pattern>
+    <!--为什么要再配一个json扩展名？
+            如果一个Ajax请求扩展名是html，但是实际服务器给浏览器返回的是JSON数据，二者就不匹配了，会出现406错误。
+            为了让Ajax请求能够顺利拿到JSON格式的响应数据，我们另外配置json扩展名
+    -->
+    <url-pattern>*.json</url-pattern>
+  </servlet-mapping>
+
+</web-app>
