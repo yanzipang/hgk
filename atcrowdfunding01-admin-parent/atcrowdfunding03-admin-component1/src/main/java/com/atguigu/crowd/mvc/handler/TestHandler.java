@@ -2,6 +2,7 @@ package com.atguigu.crowd.mvc.handler;
 
 import com.atguigu.crowd.Admin;
 import com.atguigu.crowd.service.api.AdminService;
+import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,17 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 public class TestHandler {
     @Autowired
     private AdminService adminService;
-
+    Logger logger = LoggerFactory.getLogger(TestHandler.class);
     @ResponseBody
     @RequestMapping("/send/array/three.json")
-    public ResultEntity<List<Integer>> testReceiveArrayThree(@RequestBody() List<Integer> array){
-        Logger logger = LoggerFactory.getLogger(TestHandler.class);
+    public ResultEntity<List<Integer>> testReceiveArrayThree(@RequestBody() List<Integer> array,HttpServletRequest request){
+        boolean judgeResult = CrowdUtil.judgeRequestType(request);
+        logger.info("judgeResult==="+judgeResult);
         for (Integer number : array) {
             logger.info("number==="+number);
         }
@@ -42,9 +45,15 @@ public class TestHandler {
     }
 
     @RequestMapping("/test/ssm.html")
-    public String testSSM(ModelMap modelMap){
+    public String testSSM(ModelMap modelMap, HttpServletRequest request){
+        boolean judgeResult = CrowdUtil.judgeRequestType(request);
+        logger.info("judgeResult==="+judgeResult);
+
         List<Admin> adminList = adminService.getAll();
         modelMap.addAttribute("adminList",adminList);
+        /*String a = null;
+        System.out.println(a.length());*/
+        System.out.println(10 / 0);
         return "target";
     }
 }

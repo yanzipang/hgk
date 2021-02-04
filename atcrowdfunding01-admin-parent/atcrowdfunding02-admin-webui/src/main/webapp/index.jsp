@@ -11,6 +11,7 @@
     <title>Title</title>
     <base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
     <script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="layer/layer.js"></script>
     <script type="text/javascript">
         $(function(){
             //方案一
@@ -50,7 +51,12 @@
                     }
                 });
             });
+            //弹框
+            $("#btn5").click(function (){
+                layer.msg("layer弹框")
+            });
         });
+
     </script>
 </head>
 <body>
@@ -62,5 +68,8 @@
 <br/>
 <br/>
 <button id="btn2">send 【5,8,12】 three</button>
+<br/>
+<br/>
+<button id="btn5">点我弹框</button>
 </body>
 </html>
