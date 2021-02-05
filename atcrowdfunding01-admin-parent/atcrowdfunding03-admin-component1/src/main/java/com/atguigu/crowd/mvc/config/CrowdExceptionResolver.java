@@ -1,6 +1,7 @@
 package com.atguigu.crowd.mvc.config;
 
 import com.atguigu.crowd.constant.CrowdConstant;
+import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import com.google.gson.Gson;
@@ -15,6 +16,17 @@ import java.io.IOException;
 //@ControllerAdvice 表示当前类是一个基于注解的异常处理器
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+    @ExceptionHandler(value = LoginFailedException.class)
+    public ModelAndView resolveLoginFailedException(
+            ArithmeticException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String vaewName = "admin-login";
+        //11.返回ModelAndView对象
+        return commonResolve(vaewName,exception,request,response);
+    }
 
     @ExceptionHandler(value = ArithmeticException.class)
     public ModelAndView resolveMathException(
