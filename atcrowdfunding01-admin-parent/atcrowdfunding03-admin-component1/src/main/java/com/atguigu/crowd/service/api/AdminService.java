@@ -36,4 +36,9 @@ public interface AdminService {
      */
     PageInfo<Admin> getPageInfo(String keyword,Integer pageNum,Integer pageSize);
 
+    /**
+     * 根据ID进行删除
+     * @param adminId
+     */
+    void remove(Integer adminId);
 }

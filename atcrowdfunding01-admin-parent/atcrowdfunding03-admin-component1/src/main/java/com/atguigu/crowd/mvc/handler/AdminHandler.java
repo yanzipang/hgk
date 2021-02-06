@@ -8,6 +8,7 @@ import com.mysql.cj.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +19,26 @@ public class AdminHandler {
 
     @Autowired
     private AdminService adminService;
+
+    /**
+     * 删除一个用户
+     * @param adminId
+     * @return
+     */
+    @RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
+    public String remove(
+            @PathVariable("adminId") Integer adminId,
+            @PathVariable("pageNum") Integer pageNum,
+            @PathVariable("keyword") String keyword
+    ) {
+        // 执行删除
+        adminService.remove(adminId);
+        // 页面跳转（回到分页页面）
+        // 重定向到/admin/get/page.html地址
+        // 同时为了保持原本所在页面和查询关键词再附件pageNum和keyword两个请求参数
+        return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
+
+    }
 
     /**
      * 关键字查询，分页查询
