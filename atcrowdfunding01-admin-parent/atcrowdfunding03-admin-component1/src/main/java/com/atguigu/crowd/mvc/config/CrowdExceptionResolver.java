@@ -1,6 +1,7 @@
 package com.atguigu.crowd.mvc.config;
 
 import com.atguigu.crowd.constant.CrowdConstant;
+import com.atguigu.crowd.exception.AccessForbiddenException;
 import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
@@ -16,6 +17,16 @@ import java.io.IOException;
 //@ControllerAdvice 表示当前类是一个基于注解的异常处理器
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+    @ExceptionHandler(value = AccessForbiddenException.class)
+    public ModelAndView resolveAccessForbiddenException(
+            ArithmeticException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String vaewName = "admin-login";
+        return commonResolve(vaewName,exception,request,response);
+    }
 
     @ExceptionHandler(value = LoginFailedException.class)
     public ModelAndView resolveLoginFailedException(

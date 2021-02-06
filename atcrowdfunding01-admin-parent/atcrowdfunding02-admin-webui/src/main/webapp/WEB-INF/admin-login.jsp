@@ -22,7 +22,6 @@
     <script src="jquery/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <style>
-
     </style>
 </head>
 <body>
@@ -33,9 +32,7 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
-
     <form action="admin/do/login.html" method="post" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 管理员登录
         </h2>

@@ -33,6 +33,7 @@
                 <!--key属性执行异常全类名-->
                 <!--标签体中写对应的视图（这个值要拼前后缀，得到具体的路径）-->
                 <prop key="java.lang.Exception">system-error</prop>
+                <prop key="com.atguigu.crowd.exception.AccessForbiddenException">admin-login</prop>
             </props>
         </property>
     </bean>
@@ -45,4 +46,21 @@
     -->
     <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
     <mvc:view-controller path="/admin/to/main/page.html" view-name="admin-main"/>
+
+    <!--注册拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--mvc:mapping配置要拦截的资源
+                    /*对应一层路径，比如/aaa
+                    /**对应多层路径，比如/aaa/bbb等
+            -->
+            <mvc:mapping path="/**"/>
+            <!--mvc:exclude-mapping配置不拦截的路径-->
+            <mvc:exclude-mapping path="/admin/to/login/page.html"/>
+            <mvc:exclude-mapping path="/admin/do/login.html"/>
+            <mvc:exclude-mapping path="/admin/do/logout.html"/>
+            <!--配置自定义的拦截器-->
+            <bean class="com.atguigu.crowd.mvc.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
