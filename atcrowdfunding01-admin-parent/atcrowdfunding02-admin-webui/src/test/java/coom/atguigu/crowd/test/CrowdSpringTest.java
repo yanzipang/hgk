@@ -40,7 +40,7 @@ public class CrowdSpringTest {
     @Test
     public void testTx(){
         Admin admin = new Admin(null, "jerry", "123456", "杰瑞", "jerry@qq.com", null);
-        adminService.savaAdmin(admin);
+        adminService.saveAdmin(admin);
     }
     @Test
     public void testAdminMapperAutowired() {

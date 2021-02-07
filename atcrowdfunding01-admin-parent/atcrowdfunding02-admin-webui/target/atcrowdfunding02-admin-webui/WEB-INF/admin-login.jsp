@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <title>管理员登录界面</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,33 +22,58 @@
     <link rel="stylesheet" href="css/login.css">
     <script src="jquery/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <%--离子背景特效--%>
+    <link rel="stylesheet" media="screen" href="css/login1.css">
     <style>
     </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <div><a class="navbar-brand" href="index.html" style="font-size:32px;">言字旁网上书城</a></div>
+<%--离子背景--%>
+<div id="particles-js" style="display: flex;align-items: center;justify-content: center">
+</div>
+<div class="login-page">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <div><a class="navbar-brand" href="index.html" style="font-size:32px;">言字旁网上书城</a></div>
+            </div>
         </div>
+    </nav>
+    <div class="login-content">
+        <form action="admin/do/login.html">
+            <div class="login-tit">管理员登录</div>
+            <p style="color: red;text-align: center;">${requestScope.exception.message}</p>
+            <div class="login-input">
+                <input type="text" name="loginAcct" class="form-control" id="inputSuccess3" placeholder="请输入登录账号" autofocus>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="login-input">
+                <input type="text" name="userPswd" class="form-control" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="login-btn">
+                <div class="login-btn-left">
+                    <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
+                </div>
+            </div>
+        </form>
     </div>
-</nav>
-<div class="container">
-    <form action="admin/do/login.html" method="post" class="form-signin" role="form">
-        <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 管理员登录
-        </h2>
-        <p>${requestScope.exception.message}</p>
-        <div class="form-group has-success has-feedback">
-            <input type="text" name="loginAcct" class="form-control" id="inputSuccess3" placeholder="请输入登录账号" autofocus>
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        </div>
-        <div class="form-group has-success has-feedback">
-            <input type="text" name="userPswd" class="form-control" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
-        <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
-    </form>
 </div>
 
+
+
+<script src="js/particles.js"></script>
+<script src="js/app.js"></script>
+<script>
+    function changeImg(){
+        let pic = document.getElementById('picture');
+        console.log(pic.src)
+        if(pic.getAttribute("src",2) =="img/check.png"){
+            pic.src ="img/checked.png"
+        }else{
+            pic.src ="img/check.png"
+        }
+    }
+</script>
 </body>
 </html>

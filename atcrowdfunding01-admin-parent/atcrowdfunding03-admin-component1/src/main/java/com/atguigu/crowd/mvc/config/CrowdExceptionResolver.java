@@ -2,10 +2,13 @@ package com.atguigu.crowd.mvc.config;
 
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.exception.AccessForbiddenException;
+import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
+import com.atguigu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import com.google.gson.Gson;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +20,26 @@ import java.io.IOException;
 //@ControllerAdvice 表示当前类是一个基于注解的异常处理器
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+    @ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
+    public ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(
+            ArithmeticException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String vaewName = "system-error";
+        return commonResolve(vaewName,exception,request,response);
+    }
+
+    @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
+    public ModelAndView resolveLoginAcctAlreadyInUseException(
+            ArithmeticException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String vaewName = "admin-add";
+        return commonResolve(vaewName,exception,request,response);
+    }
 
     @ExceptionHandler(value = AccessForbiddenException.class)
     public ModelAndView resolveAccessForbiddenException(

@@ -11,7 +11,7 @@ public interface AdminService {
      * 添加管理员
      * @param admin
      */
-    void savaAdmin(Admin admin);
+    void saveAdmin(Admin admin);
 
     /**
      * 获取全部管理员信息
@@ -41,4 +41,17 @@ public interface AdminService {
      * @param adminId
      */
     void remove(Integer adminId);
+
+    /**
+     * 根据ID查询用户
+     * @param adminId
+     * @return
+     */
+    Admin getAdminById(Integer adminId);
+
+    /**
+     * 更新用户信息
+     * @param admin
+     */
+    void update(Admin admin);
 }

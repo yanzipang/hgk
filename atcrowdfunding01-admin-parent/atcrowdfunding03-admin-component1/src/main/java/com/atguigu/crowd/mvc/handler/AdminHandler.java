@@ -20,6 +20,44 @@ public class AdminHandler {
     @Autowired
     private AdminService adminService;
 
+    @RequestMapping("/admin/update.html")
+    public String update(
+            Admin admin,
+            @RequestParam("pageNum") Integer pageNum,
+            @RequestParam("keyword") String keyword
+    ) {
+        adminService.update(admin);
+        return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
+    }
+
+    /**
+     * 跳转到更新用户信息页面
+     */
+    @RequestMapping("/admin/to/edit/page.html")
+    public String toEditPage(
+            @RequestParam("adminId") Integer adminId,
+            ModelMap modelMap
+    ) {
+        // 1.根据adminID查询Admin对象
+        Admin admin = adminService.getAdminById(adminId);
+
+        // 2.将Admin对象存入模型
+        modelMap.addAttribute("admin",admin);
+
+        return "admin-edit";
+    }
+
+    /**
+     * 新增一个用户
+     * @param admin
+     * @return
+     */
+    @RequestMapping("/admin/save.html")
+    public String save(Admin admin) {
+        adminService.saveAdmin(admin);
+        return "redirect:/admin/get/page.html?pageNum="+Integer.MAX_VALUE;
+    }
+
     /**
      * 删除一个用户
      * @param adminId
