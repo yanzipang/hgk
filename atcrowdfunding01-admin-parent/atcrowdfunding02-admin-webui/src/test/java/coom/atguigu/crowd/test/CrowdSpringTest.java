@@ -4,7 +4,9 @@ package coom.atguigu.crowd.test;
 
 
 import com.atguigu.crowd.Admin;
+import com.atguigu.crowd.Role;
 import com.atguigu.crowd.mapper.AdminMapper;
+import com.atguigu.crowd.mapper.RoleMapper;
 import com.atguigu.crowd.service.api.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +31,15 @@ public class CrowdSpringTest {
     private AdminMapper adminMapper;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private RoleMapper roleMapper;
 
+    @Test
+    public void testSaveRole(){
+        for (int i = 0; i < 235; i++) {
+            roleMapper.insert(new Role(null,"zjl"+i));
+        }
+    }
     @Test
     public void test(){
         for (int i = 0; i < 238; i++) {

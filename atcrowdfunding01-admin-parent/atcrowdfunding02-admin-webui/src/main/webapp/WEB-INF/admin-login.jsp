@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>管理员登录界面</title>
+    <title>管理员登录</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,13 +17,13 @@
     <meta name="keys" content="">
     <meta name="author" content="">
     <base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/login.css">
-    <script src="jquery/jquery-2.1.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/login.css">
+    <script src="static/jquery/jquery-2.1.1.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <%--离子背景特效--%>
-    <link rel="stylesheet" media="screen" href="css/login1.css">
+    <link rel="stylesheet" media="screen" href="static/css/login1.css">
     <style>
     </style>
 </head>
@@ -62,16 +62,16 @@
 
 
 
-<script src="js/particles.js"></script>
-<script src="js/app.js"></script>
+<script src="static/js/particles.js"></script>
+<script src="static/js/app.js"></script>
 <script>
     function changeImg(){
         let pic = document.getElementById('picture');
         console.log(pic.src)
-        if(pic.getAttribute("src",2) =="img/check.png"){
-            pic.src ="img/checked.png"
+        if(pic.getAttribute("src",2) =="static/img/check.png"){
+            pic.src ="static/img/checked.png"
         }else{
-            pic.src ="img/check.png"
+            pic.src ="static/img/check.png"
         }
     }
 </script>

@@ -9,10 +9,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
+<head>
+    <title>
+        用户维护
+    </title>
+</head>
 <%@include file="/WEB-INF/include-head.jsp"%>
 <%--引入分页--%>
-<link rel="stylesheet" href="css/pagination.css"/>
-<script type="text/javascript" src="jquery/jquery.pagination.js"></script>
+<link rel="stylesheet" href="static/css/pagination.css"/>
+<script type="text/javascript" src="static/jquery/jquery.pagination.js"></script>
 <%--分页的js--%>
 <script type="text/javascript">
 

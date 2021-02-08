@@ -8,6 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
+<head>
+    <title>
+        管理员主页面
+    </title>
+</head>
 <%@include file="/WEB-INF/include-head.jsp"%>
 <body>
     <%@include file="/WEB-INF/include-nav.jsp"%>

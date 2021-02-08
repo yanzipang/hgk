@@ -1,6 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
+<head>
+    <title>
+        新增用户
+    </title>
+</head>
 <%@include file="/WEB-INF/include-head.jsp"%>
 <body>
 <%@include file="/WEB-INF/include-nav.jsp"%>
