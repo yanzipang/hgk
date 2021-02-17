@@ -5,7 +5,6 @@ import com.atguigu.crowd.service.api.RoleService;
 import com.atguigu.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RoleHandler {
     @Autowired
     private RoleService roleService;
+
+    @ResponseBody
+    @RequestMapping("/role/save.json")
+    public ResultEntity<Object> saveRole(Role role) {
+        roleService.saveRole(role);
+
+        return ResultEntity.successWithoutData();
+    }
 
     /**
      * 分页查询

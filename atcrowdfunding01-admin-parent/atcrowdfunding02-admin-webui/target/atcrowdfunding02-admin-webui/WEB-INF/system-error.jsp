@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="static/css/login.css">
     <script src="static/jquery/jquery-2.1.1.min.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <%--离子背景--%>
+    <link rel="stylesheet" media="screen" href="static/css/login1.css">
     <script type="text/javascript">
         $(function (){
             $("button").click(function (){
@@ -41,21 +43,41 @@
     </div>
 </nav>
 
-<div class="container">
-
-
-        <h2 class="form-signin-heading" style="text-align: center;">
-            <i class="glyphicon glyphicon-log-in"></i>
-            言字旁书城系统消息
-        </h2>
-        <%--
-            requestScope:对应的是村方request域数据的Map
-            requestScope.exception:相当于request.getAttribut("exception")
-            requestScope.exception.message:相当于exception.getMessage()
-        --%>
-        <h3 style="text-align: center;">${requestScope.exception.message}</h3>
-        <button style="width: 150px;margin: 50px auto 0px auto;" class="btn btn-lg btn-success btn-block">点我返回上一步</button>
+<div id="particles-js" style="display: flex;align-items: center;justify-content: center">
 </div>
+<div class="login-page">
+    <div class="login-content">
+
+        <div class="login-tit">
+            <h2 class="form-signin-heading" style="text-align: center;">
+                <i class="glyphicon glyphicon-log-in"></i>
+                言字旁书城系统消息
+            </h2>
+        </div>
+            <%--
+                requestScope:对应的是村方request域数据的Map
+                requestScope.exception:相当于request.getAttribut("exception")
+                requestScope.exception.message:相当于exception.getMessage()
+            --%>
+            <h3 style="text-align: center;color: darkred;font-size: 30px;">${requestScope.exception.message}</h3>
+            <button style="width: 150px;margin: 50px auto 0px auto;" class="btn btn-lg btn-success btn-block">点我返回上一步</button>
+
+
+    </div>
+</div>
+<script src="static/js/particles.js"></script>
+<script src="static/js/app.js"></script>
+<script>
+    function changeImg(){
+        let pic = document.getElementById('picture');
+        console.log(pic.src)
+        if(pic.getAttribute("src",2) =="static/img/check.png"){
+            pic.src ="static/img/checked.png"
+        }else{
+            pic.src ="static/img/check.png"
+        }
+    }
+</script>
 
 </body>
 </html>
