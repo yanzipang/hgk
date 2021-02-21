@@ -11,6 +11,31 @@
 <link rel="stylesheet" href="static/css/pagination.css"/>
 <script type="text/javascript" src="static/jquery/jquery.pagination.js"></script>
 <script type="text/javascript">
+
+    //声明专门的函数，显示确认模态框
+    function showConfirmModal(roleArray) {
+        // 打开模态框
+        $("#confirmModal").modal("show");
+
+        // 清除旧的数据
+        $("#roleNameDiv").empty();
+
+        // 在全局变量范围内创建数组用来存放角色id
+         window.roleIdArray = [];
+
+        // 遍历roleArray数组
+        for (var i = 0; i < roleArray.length; i++) {
+            var role = roleArray[i];
+            var roleName = role.roleName;
+            $("#roleNameDiv").append(roleName+"<br/>");
+
+            var roleId = role.roleId;
+
+            // 调用数组对象的push()方法存入数据
+            window.roleIdArray.push(roleId);
+        }
+    }
+
     // 执行分页，生成页面效果，任何时候调用这个函数都会重新加载页面
     function generatePage() {
 
@@ -89,11 +114,13 @@
             var roleId = role.id;
             var roleName = role.name;
             var numberTd = "<td>"+(i+1)+"</td>";
-            var checkboxTd = "<td><input type='checkbox'></td>";
+            var checkboxTd = "<td><input id='"+roleId+"' class='itemBox' type='checkbox'></td>";
             var roleNameTd = "<td>"+roleName+"</td>";
             var checkBtn = "<button type='button' class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check'></i></button>";
-            var pencilBtn = "<button type='button' class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-pencil'></i></button>";
-            var removeBtn = "<button type='button' class='btn btn-danger btn-xs'><i class=' glyphicon glyphicon-remove'></i></button>";
+            // 通过button标签的id属性(别的属性其实也可以)把roleId的值传递到button按钮的单击响应函数中，在单击响应函数中使用this.id
+            var pencilBtn = "<button id='"+roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";
+            // 通过button标签的id属性(别的属性其实也可以)把roleId的值传递到button按钮的单击响应函数中，在单击响应函数中使用this.id
+            var removeBtn = "<button id='"+roleId+"' type='button' class='btn btn-danger btn-xs removeBtn'><i class=' glyphicon glyphicon-remove'></i></button>";
             var buttonTd = "<td>"+checkBtn+" "+pencilBtn+" "+removeBtn+"</td>";
             var tr = "<tr>"+numberTd+checkboxTd+roleNameTd+buttonTd+"</tr>";
             $("#rolePageBody").append(tr);
@@ -198,6 +225,155 @@
             $("#addModal").modal("hide");
             // 清理模态框
             $("#addModal [name=roleName]").val(""); });
+
+        // 6.给页面上的“铅笔”按钮绑定单击响应函数，目的是打开模态框
+        // 传统的事件绑定方式只能在第一个页面有效，翻页后失效了
+        /*
+            $(".pencilBtn").click(function(){
+                alert("aaaa...");
+            });
+        */
+
+        // 使用 jQuery 对象的 on()函数可以解决上面问题
+        // ①首先找到所有“动态生成”的元素所附着的“静态”元素
+        // ②on()函数的第一个参数是事件类型
+        // ③on()函数的第二个参数是找到真正要绑定事件的元素的选择器
+        // ④on()函数的第三个参数是事件的响应函数
+        $("#rolePageBody").on("click",".pencilBtn",function(){
+            // 打开模态框
+            $("#editModal").modal("show");
+            // 获取表格中当前行中的角色名称
+            var roleName = $(this).parent().prev().text();
+            // 获取当前角色的 id
+            // 依据是：var pencilBtn = "<button id='"+roleId+"' ……这段代码中我们把 roleId 设置到 id 属性了
+            // 为了让执行更新的按钮能够获取到 roleId 的值，把它放在全局变量上
+            window.roleId = this.id;
+            // 使用 roleName 的值设置模态框中的文本框
+            $("#editModal [name=roleName]").val(roleName);
+        });
+        // 7.给更新模态框中的更新按钮绑定单击响应函数
+        $("#updateRoleBtn").click(function(){
+            // ①从文本框中获取新的角色名称
+            var roleName = $("#editModal [name=roleName]").val();
+            // ②发送 Ajax 请求执行更新
+            $.ajax({
+                "url":"role/update.json",
+                "type":"post",
+                "data":{
+                    "id":window.roleId,
+                    "name":roleName
+                },
+                "dataType":"json",
+                "success":function(response){
+                    var result = response.result;
+                    if(result == "SUCCESS") {
+                        layer.msg("操作成功！");
+                        // 重新加载分页数据
+                        generatePage();
+                    }
+                    if(result == "FAILED") {
+                        layer.msg("操作失败！"+response.message);
+                    }
+                    },
+                "error":function(response){
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+            // ③关闭模态框
+            $("#editModal").modal("hide");
+        });
+
+        // 点击模态框中的确定按钮执行删除
+        $("#removeRoleBtn").click(function () {
+            var requestBody = JSON.stringify(window.roleIdArray);
+
+            $.ajax({
+                "url":"role/remove/by/role/id/array.json",
+                "type":"post",
+                "data":requestBody,
+                "contentType":"application/json;charset=UTF-8",
+                "dataType":"json",
+                "success":function(response){
+                    var result = response.result;
+                    if(result == "SUCCESS") {
+                        layer.msg("操作成功！");
+                        // 重新加载分页数据
+                        generatePage();
+                    }
+                    if(result == "FAILED") {
+                        layer.msg("操作失败！"+response.message);
+                    }
+                },
+                "error":function(response){
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+            // 关闭模态框
+            $("#confirmModal").modal("hide");
+        });
+
+        // 给单条删除按钮绑定单击响应函数
+        $("#rolePageBody").on("click",".removeBtn",function(){
+
+            // 从当前按钮出发获取角色名称
+            var roleName = $(this).parent().prev().text();
+
+            // 创建role对象存入数组
+            var roleArray = [{
+                roleId:this.id,
+                roleName:roleName
+            }];
+
+            // 调用专门的函数打开模态框
+            showConfirmModal(roleArray);
+        });
+
+        // 给总的checkbox绑定单击响应函数
+        $("#summaryBox").click(function () {
+            // 获取当前多选框自身的状态
+            var currentStatus = this.checked;
+            // ①用当前多选框的状态设置其他的多选框
+            $(".itemBox").prop("checked",currentStatus);
+        });
+
+        // 全选、全不选的反向操作
+        $("#rolePageBody").on("click",".itemBox",function(){
+            // 获取当前已经选中的itemBox的数量
+            var checkedBoxCount = $(".itemBox:checked").length;
+
+            // 获取全部.itemBox的数量
+            var totalBoxCount = $(".itemBox").length;
+
+            // 使用二者的比较结果设置总的checkbox
+            $("#summaryBox").prop("checked",checkedBoxCount == totalBoxCount);
+        });
+
+        // 给批量删除的按钮绑定单击响应函数
+        $("#batchRemoveBtn").click(function () {
+            // 创建一个数组对象，用来存放后面的到的数组对象
+            var roleArray = [];
+            // 遍历当前选中的多选框
+            $(".itemBox:checked").each(function () {
+                // 使用this引用当前遍历得到的多选框
+                var roleId = this.id;
+
+                // 通过DOM操作获取角色名称
+                var roleName = $(this).parent().next().text();
+                roleArray.push({
+                    "roleId":roleId,
+                    "roleName":roleName
+                });
+            });
+
+            // 检查roleArray的长度是否为0
+            if (roleArray.length == 0) {
+                layer.msg("请至少选择一个执行删除");
+                return ;
+            }
+
+            // 调用专门的函数打开模态框
+            showConfirmModal(roleArray);
+        });
     });
 </script>
 <body>
@@ -222,7 +398,7 @@
                             <i class="glyphicon glyphicon-search"></i> 查询
                         </button>
                     </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;">
+                    <button id="batchRemoveBtn" type="button" class="btn btn-danger" style="float:right;margin-left:10px;">
                         <i class=" glyphicon glyphicon-remove"></i> 删除
                     </button>
                     <button type="button" id="showAddModalBtn" class="btn btn-primary" style="float:right;">
@@ -235,7 +411,7 @@
                             <thead>
                             <tr>
                                 <th width="30">#</th>
-                                <th width="30"><input type="checkbox"></th>
+                                <th width="30"><input id="summaryBox" type="checkbox"></th>
                                 <th>名称</th>
                                 <th width="100">操作</th>
                             </tr>
@@ -257,5 +433,9 @@
 </div>
     <%--添加角色模态框:模态框默认情况下是隐藏的--%>
     <%@include file="/WEB-INF/modal-role-add.jsp" %>
+    <%--更新角色模态框--%>
+    <%@include file="/WEB-INF/modal-role-edit.jsp" %>
+    <%--删除角色模态框--%>
+    <%@include file="/WEB-INF/modal-role-confirm.jsp" %>
 </body>
 </html>

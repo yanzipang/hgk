@@ -1,3 +1,27 @@
+//声明专门的函数，显示确认模态框
+function showConfirmModal(roleArray) {
+    // 打开模态框
+    $("#confirmModal").modal("show");
+
+    // 清除旧的数据
+    $("#roleNameDiv").empty();
+
+    // 在全局变量范围内创建数组用来存放角色id
+    window.roleIdArray = [];
+
+    // 遍历roleArray数组
+    for (var i = 0; i < roleArray.length; i++) {
+        var role = roleArray[i];
+        var roleName = role.roleName;
+        $("#roleNameDiv").append(roleName+"<br/>");
+
+        var roleId = role.roleId;
+
+        // 调用数组对象的push()方法存入数据
+        window.roleIdArray.push(roleId);
+    }
+}
+
 // 执行分页，生成页面效果，任何时候调用这个函数都会重新加载页面
 function generatePage() {
 
@@ -76,11 +100,13 @@ function fillTableBody(pageInfo) {
         var roleId = role.id;
         var roleName = role.name;
         var numberTd = "<td>"+(i+1)+"</td>";
-        var checkboxTd = "<td><input type='checkbox'></td>";
+        var checkboxTd = "<td><input id='"+roleId+"' class='itemBox' type='checkbox'></td>";
         var roleNameTd = "<td>"+roleName+"</td>";
         var checkBtn = "<button type='button' class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check'></i></button>";
-        var pencilBtn = "<button type='button' class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-pencil'></i></button>";
-        var removeBtn = "<button type='button' class='btn btn-danger btn-xs'><i class=' glyphicon glyphicon-remove'></i></button>";
+        // 通过button标签的id属性(别的属性其实也可以)把roleId的值传递到button按钮的单击响应函数中，在单击响应函数中使用this.id
+        var pencilBtn = "<button id='"+roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";
+        // 通过button标签的id属性(别的属性其实也可以)把roleId的值传递到button按钮的单击响应函数中，在单击响应函数中使用this.id
+        var removeBtn = "<button id='"+roleId+"' type='button' class='btn btn-danger btn-xs removeBtn'><i class=' glyphicon glyphicon-remove'></i></button>";
         var buttonTd = "<td>"+checkBtn+" "+pencilBtn+" "+removeBtn+"</td>";
         var tr = "<tr>"+numberTd+checkboxTd+roleNameTd+buttonTd+"</tr>";
         $("#rolePageBody").append(tr);
@@ -89,7 +115,6 @@ function fillTableBody(pageInfo) {
     // 生成分页导航条
     generateNavigator(pageInfo);
 }
-
 
 
 // 生成分页页码导航条
@@ -115,7 +140,7 @@ function generateNavigator(pageInfo) {
 
 
 // 翻页时的回调函数
-function paginationCallBack(pageInfo,JQuery) {
+function paginationCallBack(pageIndex,JQuery) {
 
     // 修改 window 对象的 pageNum 属性
     window.pageNum = pageIndex + 1;
