@@ -6,6 +6,7 @@ import com.atguigu.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -17,6 +18,47 @@ public class MenuHandler {
 
     @Autowired
     private MenuService menuService;
+
+    /**
+     * 删除节点
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/menu/remove.json")
+    public ResultEntity<String> removeMenu(@RequestParam("id") Integer id) {
+        menuService.removeMenu(id);
+        return ResultEntity.successWithoutData();
+    }
+
+    /**
+     * 更新节点
+     * @param menu
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/menu/update.json")
+    public ResultEntity<String> updateMenu(Menu menu) {
+
+        menuService.updateMenu(menu);
+
+        return ResultEntity.successWithoutData();
+    }
+
+    /**
+     * 添加节点
+     * @param menu
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/menu/save.json")
+    public ResultEntity<String> saveMenu(Menu menu) {
+
+        // Thread.sleep(2000);
+        menuService.saveMenu(menu);
+
+        return ResultEntity.successWithoutData();
+    }
 
     @ResponseBody
     @RequestMapping("/menu/get/whole/tree.json")
