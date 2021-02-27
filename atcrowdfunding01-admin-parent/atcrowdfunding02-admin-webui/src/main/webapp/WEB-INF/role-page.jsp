@@ -10,7 +10,97 @@
 <%--引入分页--%>
 <link rel="stylesheet" href="static/css/pagination.css"/>
 <script type="text/javascript" src="static/jquery/jquery.pagination.js"></script>
+<%--引入ztree插件--%>
+<link rel="stylesheet" href="static/ztree/zTreeStyle.css" />
+<script type="text/javascript" src="static/ztree/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript">
+
+    // 声明专门的函数用来在分配 Auth 的模态框中显示 Auth 的树形结构数据
+    function fillAuthTree() {
+
+        // 1.发送 Ajax 请求查询 Auth 数据
+        var ajaxReturn = $.ajax({
+            "url":"assgin/get/all/auth.json",
+            "type":"post",
+            "dataType":"json",
+            "async":false
+        });
+        if(ajaxReturn.status != 200) {
+            layer.msg("请求处理出错！响应状态码是:"+ajaxReturn.status+"说明是:"+ajaxReturn.statusText);
+            return ;
+        }
+
+        // 2.从响应结果中获取 Auth 的 JSON 数据
+        // 从服务器端查询到的 list 不需要组装成树形结构，这里我们交给 zTree 去组装
+        var authList = ajaxReturn.responseJSON.data;
+
+        // 3.准备对 zTree 进行设置的 JSON 对象
+        var setting = {
+            "data": {
+                "simpleData": {
+
+                    // 开启简单 JSON 功能
+                    "enable": true,
+                    // 使用 categoryId 属性关联父节点，不用默认的 pId 了
+                    "pIdKey": "categoryId"
+                },
+                "key": {
+                    // 使用 title 属性显示节点名称，不用默认的 name 作为属性名了
+                    "name": "title"
+                }
+            },
+            "check": {
+                "enable": true
+            }
+        };
+
+        // 4.生成树形结构
+        // <ul id="authTreeDemo" class="ztree"></ul>
+        $.fn.zTree.init($("#authTreeDemo"), setting, authList);
+
+        // 获取 zTreeObj 对象
+        var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+
+        // 调用 zTreeObj 对象的方法，把节点展开
+        zTreeObj.expandAll(true);
+
+        // 5.查询已分配的 Auth 的 id 组成的数组
+        ajaxReturn = $.ajax({
+            "url":"assign/get/assigned/auth/id/by/role/id.json",
+            "type":"post",
+            "data":{
+                "roleId":window.roleId
+            },
+            "dataType":"json",
+            "async":false
+        });
+        if(ajaxReturn.status != 200) {
+            layer.msg("请求处理出错!响应状态码是："+ajaxReturn.status+"说明是："+ajaxReturn.statusText);
+            return ;
+        }
+
+        // 从响应结果中获取 authIdArray
+        var authIdArray = ajaxReturn.responseJSON.data;
+
+        // 6.根据 authIdArray 把树形结构中对应的节点勾选上
+        // ①遍历 authIdArray
+        for(var i = 0; i < authIdArray.length; i++) {
+            var authId = authIdArray[i];
+
+            // ②根据 id 查询树形结构中对应的节点
+            var treeNode = zTreeObj.getNodeByParam("id", authId);
+
+            // ③将 treeNode 设置为被勾选
+            // checked 设置为 true 表示节点勾选
+            var checked = true;
+
+            // checkTypeFlag 设置为 false，表示不“联动”，不联动是为了避免把不该勾选的勾选上
+            var checkTypeFlag = false;
+
+            // 执行
+            zTreeObj.checkNode(treeNode, checked, checkTypeFlag);
+        }
+    }
 
     //声明专门的函数，显示确认模态框
     function showConfirmModal(roleArray) {
@@ -116,7 +206,7 @@
             var numberTd = "<td>"+(i+1)+"</td>";
             var checkboxTd = "<td><input id='"+roleId+"' class='itemBox' type='checkbox'></td>";
             var roleNameTd = "<td>"+roleName+"</td>";
-            var checkBtn = "<button type='button' class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check'></i></button>";
+            var checkBtn = "<button id='"+roleId+"' type='button' class='btn btn-success btn-xs checkBtn'><i class=' glyphicon glyphicon-check'></i></button>";
             // 通过button标签的id属性(别的属性其实也可以)把roleId的值传递到button按钮的单击响应函数中，在单击响应函数中使用this.id
             var pencilBtn = "<button id='"+roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class=' glyphicon glyphicon-pencil'></i></button>";
             // 通过button标签的id属性(别的属性其实也可以)把roleId的值传递到button按钮的单击响应函数中，在单击响应函数中使用this.id
@@ -374,6 +464,68 @@
             // 调用专门的函数打开模态框
             showConfirmModal(roleArray);
         });
+
+        // 13.给分配权限按钮绑定单击响应函数
+        $("#rolePageBody").on("click",".checkBtn",function(){
+
+            // 把当前角色id存入全局变量
+            window.roleId = this.id;
+            // 打开模态框
+            $("#assignModal").modal("show");
+
+            // 在模态框中装载树 Auth 的形结构数据
+            fillAuthTree();
+        });
+
+        // 14.给分配权限模态框中的“分配”按钮绑定单击响应函数
+        $("#assignBtn").click(function(){
+
+            // ①收集树形结构的各个节点中被勾选的节点
+            // [1]声明一个专门的数组存放id
+            var authIdArray = [];
+
+            // [2]获取 zTreeObj 对象
+            var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+
+            // [3]获取全部被勾选的节点
+            var checkedNodes = zTreeObj.getCheckedNodes();
+
+            // [4]遍历 checkedNodes
+            for(var i = 0; i < checkedNodes.length; i++) {
+                var checkedNode = checkedNodes[i];
+                var authId = checkedNode.id;
+                authIdArray.push(authId);
+            }
+
+            // ②发送请求执行分配
+            var requestBody = {
+                "authIdArray":authIdArray,
+                // 为了服务器端 handler 方法能够统一使用 List<Integer>方式接收数据，roleId 也存入数组
+                "roleId":[window.roleId]
+            };
+            requestBody = JSON.stringify(requestBody);
+            $.ajax({
+                "url":"assign/do/role/assign/auth.json",
+                "type":"post",
+                "data":requestBody,
+                "contentType":"application/json;charset=UTF-8",
+                "dataType":"json",
+                "success":function(response){
+                    var result = response.result;
+                    if(result == "SUCCESS") {
+                        layer.msg("操作成功！");
+                    }
+                    if(result == "FAILED") {
+                        layer.msg("操作失败！"+response.message);
+                    }
+                },
+                "error":function(response) {
+                    layer.msg(response.status+" "+response.statusText);
+                }
+            });
+            $("#assignModal").modal("hide");
+        });
+
     });
 </script>
 <body>
@@ -437,5 +589,7 @@
     <%@include file="/WEB-INF/modal-role-edit.jsp" %>
     <%--删除角色模态框--%>
     <%@include file="/WEB-INF/modal-role-confirm.jsp" %>
+    <%--给角色分配Auth模态框--%>
+    <%@include file="/WEB-INF/modal-role-assign-auth.jsp" %>
 </body>
 </html>
