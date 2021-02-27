@@ -35,4 +35,8 @@ public interface AdminMapper {
      * @return
      */
     List<Admin> selectAdminByKeyword(String keyword);
+
+    void deleteOLdRelationship(Integer adminId);
+
+    void insertNewRelationship(@Param("adminId") Integer adminId, @Param("roleIdList") List<Integer> roleIdList);
 }

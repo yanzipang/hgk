@@ -20,4 +20,18 @@ public interface RoleService {
     void updateRole(Role role);
 
     void removeRole(List<Integer> roleIdList);
+
+    /**
+     * 查询已分配角色
+     * @param adminId
+     * @return
+     */
+    List<Role> getAssignedRole(Integer adminId);
+
+    /**
+     * 查询未分配角色
+     * @param adminId
+     * @return
+     */
+    List<Role> getUnAssignedRole(Integer adminId);
 }

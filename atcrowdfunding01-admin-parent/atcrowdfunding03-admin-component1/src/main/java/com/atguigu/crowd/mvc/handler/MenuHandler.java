@@ -4,16 +4,19 @@ import com.atguigu.crowd.Menu;
 import com.atguigu.crowd.service.api.MenuService;
 import com.atguigu.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+//import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+//@Controller
+//@ResponseBody
+@RestController //@RestController==@Controller+@ResponseBody
 public class MenuHandler {
 
     @Autowired
@@ -24,7 +27,7 @@ public class MenuHandler {
      * @param id
      * @return
      */
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/menu/remove.json")
     public ResultEntity<String> removeMenu(@RequestParam("id") Integer id) {
         menuService.removeMenu(id);
@@ -36,7 +39,7 @@ public class MenuHandler {
      * @param menu
      * @return
      */
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/menu/update.json")
     public ResultEntity<String> updateMenu(Menu menu) {
 
@@ -50,7 +53,7 @@ public class MenuHandler {
      * @param menu
      * @return
      */
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/menu/save.json")
     public ResultEntity<String> saveMenu(Menu menu) {
 
@@ -60,7 +63,7 @@ public class MenuHandler {
         return ResultEntity.successWithoutData();
     }
 
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping("/menu/get/whole/tree.json")
     public ResultEntity<Menu> getWholeTreeNew() {
 

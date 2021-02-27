@@ -54,4 +54,11 @@ public interface AdminService {
      * @param admin
      */
     void update(Admin admin);
+
+    /**
+     * 给管理员用户分配角色
+     * @param adminId
+     * @param roleIdList
+     */
+    void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList);
 }
