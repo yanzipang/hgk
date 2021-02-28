@@ -26,7 +26,7 @@
         <!--
             execution(public String com.atguigu.crowd.service.AdminService.saveAdmin(Admin))
         -->
-        <!--考虑到后面要整合SpringSercurity，避免把UserDDetailService加入事务控制，所以让切入点表达式定位到ServiceImpl-->
+        <!--考虑到后面要整合SpringSercurity，避免把UserDetailService加入事务控制，所以让切入点表达式定位到ServiceImpl-->
         <aop:pointcut id="txPointcut" expression="execution(* *..*ServiceImpl.*(..))"/>
         <!--将切入点表达式和事务通知关联起来-->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"></aop:advisor>

@@ -40,9 +40,10 @@
         </div>
     </nav>
     <div class="login-content">
-        <form action="admin/do/login.html">
+        <form action="security/do/login.html" method="post">
             <div class="login-tit">管理员登录</div>
             <p style="color: red;text-align: center;">${requestScope.exception.message}</p>
+            <p style="color: red;text-align: center;">${SPRING_SECURITY_LAST_EXCEPTION.message }</p>
             <div class="login-input">
                 <input type="text" name="loginAcct" class="form-control" id="inputSuccess3" placeholder="请输入登录账号" autofocus>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>

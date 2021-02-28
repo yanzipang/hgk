@@ -107,7 +107,7 @@ public class AdminHandler {
     }
 
     /**
-     * 管理员退出登录
+     * 管理员退出登录 (在引入SpringSecurity后废除)
      * @param session
      * @return
      */
@@ -121,7 +121,7 @@ public class AdminHandler {
     }
 
     /**
-     * 管理员登录检查
+     * 管理员登录检查 (在引入SpringSecurity后废除)
      * @param loginAcct
      * @param userPswd
      * @param session

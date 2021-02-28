@@ -153,6 +153,15 @@
       </if>
     </trim>
   </insert>
+
+  <select id="selectAssignedAuthNameByAdminId" resultType="string">
+    SELECT DISTINCT t_auth.`name`
+    FROM t_auth
+    LEFT JOIN inner_role_auth ON t_auth.id = inner_role_auth.id
+    LEFT JOIN inner_admin_role  ON inner_admin_role.role_id = inner_role_auth.role_id
+    WHERE inner_admin_role.admin_id = #{adminId} AND t_auth.`name` != "" AND t_auth.name IS NOT NULL
+  </select>
+
   <select id="countByExample" parameterType="com.atguigu.crowd.AuthExample" resultType="java.lang.Integer" >
     select count(*) from t_auth
     <if test="_parameter != null" >

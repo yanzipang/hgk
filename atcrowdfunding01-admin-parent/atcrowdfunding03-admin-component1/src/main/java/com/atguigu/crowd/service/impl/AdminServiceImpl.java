@@ -181,4 +181,25 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+    /**
+     * 根据账号查询Admin
+     * @param username
+     * @return
+     */
+    @Override
+    public Admin getAdminByLoginAcct(String username) {
+
+        AdminExample example = new AdminExample();
+
+        AdminExample.Criteria criteria = example.createCriteria();
+
+        criteria.andLoginAcctEqualTo(username);
+
+        List<Admin> list = adminMapper.selectByExample(example);
+
+        Admin admin = list.get(0);
+
+        return admin;
+    }
+
 }
