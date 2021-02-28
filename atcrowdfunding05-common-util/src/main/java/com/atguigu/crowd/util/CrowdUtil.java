@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
  * @author 韩广凯
  */
 public class CrowdUtil {
+
     /**
      * 对明文字符串进行加密（使用MD5方式）
      * @param source 传入的明文字符串

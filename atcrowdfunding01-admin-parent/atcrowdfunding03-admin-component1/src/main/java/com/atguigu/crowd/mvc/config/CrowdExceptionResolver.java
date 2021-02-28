@@ -41,9 +41,9 @@ public class CrowdExceptionResolver {
         return commonResolve(vaewName,exception,request,response);
     }
 
-    @ExceptionHandler(value = AccessForbiddenException.class)
-    public ModelAndView resolveAccessForbiddenException(
-            ArithmeticException exception,
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView resolveException(
+            Exception exception,
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException {
