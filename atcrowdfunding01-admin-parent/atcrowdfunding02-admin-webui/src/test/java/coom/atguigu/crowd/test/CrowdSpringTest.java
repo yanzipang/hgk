@@ -34,16 +34,19 @@ public class CrowdSpringTest {
     @Autowired
     private RoleMapper roleMapper;
 
+    // 添加角色测试数据
     @Test
     public void testSaveRole(){
         for (int i = 0; i < 235; i++) {
-            roleMapper.insert(new Role(null,"zjl"+i));
+            roleMapper.insert(new Role(null,"韩广凯(角色)"+i));
         }
     }
+
+    // 添加用户测试数据
     @Test
     public void test(){
         for (int i = 0; i < 238; i++) {
-            adminMapper.insert(new Admin(null,"loginAcct"+i,"userPswd"+i,"userName"+i,"email"+i,null));
+            adminMapper.insert(new Admin(null,"韩广凯(用户)"+i,"userPswd"+i,"userName"+i,"email"+i,null));
         }
     }
 
