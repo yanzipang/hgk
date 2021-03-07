@@ -4,7 +4,7 @@ spring:
   application:
     name: atguigu.crowd.redis
   redis:
-    host: 127.1.1.1
+    host: 192.168.27.128
 eureka:
   client:
     service-url:

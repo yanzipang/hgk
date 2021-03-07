@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="GB18030">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="GB18030">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <base th:href="@{/}"/>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/carousel.css">
@@ -52,7 +53,7 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* ²àÀ¸µ¼º½ */
+        /* ä¾§æ å¯¼èˆª */
         .sideBox {
             padding: 10px;
             height: 220px;
@@ -101,7 +102,7 @@
             background: #D5CFBF;
         }
 
-        /* ÁÐ±íÒ³ */
+        /* åˆ—è¡¨é¡µ */
         #mainBox {
             margin-bottom: 10px;
             padding: 10px;
@@ -134,7 +135,7 @@
             float: right;
         }
 
-        /* Î»ÖÃµ¼º½ */
+        /* ä½ç½®å¯¼èˆª */
         .path {
             height: 30px;
             line-height: 30px;
@@ -145,7 +146,7 @@
             margin: 0 5px;
         }
 
-        /* ÎÄÕÂÁÐ±í */
+        /* æ–‡ç« åˆ—è¡¨ */
         .newsList {
             padding: 10px;
             text-align: left;
@@ -179,7 +180,7 @@
             overflow: hidden;
         }
 
-        /* Í¨ÓÃ´øÍ¼Æ¬µÄÐÅÏ¢ÁÐ±í_ÆÕÍ¨Ê½ */
+        /* é€šç”¨å¸¦å›¾ç‰‡çš„ä¿¡æ¯åˆ—è¡¨_æ™®é€šå¼ */
         .picList {
             padding: 10px;
             text-align: left;
@@ -211,14 +212,14 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html" style="font-size:32px;">ÉÐ³ïÍø-´´Òâ²úÆ·ÖÚ³ïÆ½Ì¨</a>
+                    <a class="navbar-brand" href="index.html" style="font-size:32px;">å°šç­¹ç½‘-åˆ›æ„äº§å“ä¼—ç­¹å¹³å°</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse" style="float:right;">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="login.html">µÇÂ¼</a></li>
-                        <li><a href="reg.html">×¢²á</a></li>
+                        <li><a href="login.html">ç™»å½•</a></li>
+                        <li><a href="reg.html">æ³¨å†Œ</a></li>
                         <li><a>|</a></li>
-                        <li><a href="admin-login.html">¹ÜÀíÔ±Èë¿Ú</a></li>
+                        <li><a href="admin-login.html">ç®¡ç†å‘˜å…¥å£</a></li>
                     </ul>
                 </div>
             </div>
@@ -270,23 +271,23 @@
         <div class="col-lg-4">
             <img class="img-circle" src="img/p1.jpg" alt="Generic placeholder image"
                  style="width: 140px; height: 140px;">
-            <h2>ÖÇÄÜ¸ßÇå¼à¿Ø»úÆ÷ÈË</h2>
-            <p>¿É°®µÄÔìÐÍ£¬ÉãÏñ°²·ÀÔ¶³Ì»¥ÁªµÄÈ«ÄÜÉè¼Æ£¬ÈÃÄãËæÊ±ËæµØÊØ»¤ÄúµÄ¼ÒÈË£¬Åã°éÄãµÄÉú»î¡£</p>
-            <p><a class="btn btn-default" href="project.html" role="button">ÏîÄ¿ÏêÇé &raquo;</a></p>
+            <h2>æ™ºèƒ½é«˜æ¸…ç›‘æŽ§æœºå™¨äºº</h2>
+            <p>å¯çˆ±çš„é€ åž‹ï¼Œæ‘„åƒå®‰é˜²è¿œç¨‹äº’è”çš„å…¨èƒ½è®¾è®¡ï¼Œè®©ä½ éšæ—¶éšåœ°å®ˆæŠ¤æ‚¨çš„å®¶äººï¼Œé™ªä¼´ä½ çš„ç”Ÿæ´»ã€‚</p>
+            <p><a class="btn btn-default" href="project.html" role="button">é¡¹ç›®è¯¦æƒ… &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" src="img/p2.jpg" alt="Generic placeholder image"
                  style="width: 140px; height: 140px;">
-            <h2>NEOKAÖÇÄÜÊÖ»·</h2>
-            <p>ÒªÔË¶¯¸üÒª°²È«£¬Õâ¿î¡¢ÃûÎª¡°µûÎè¡±µÄNEOKA-V9100ÖÇÄÜÔË¶¯ÊÖ»·Îª¡°°²È«ÔË¶¯¶øÉú¡±¡£</p>
-            <p><a class="btn btn-default" href="project.html" role="button">ÏîÄ¿ÏêÇé &raquo;</a></p>
+            <h2>NEOKAæ™ºèƒ½æ‰‹çŽ¯</h2>
+            <p>è¦è¿åŠ¨æ›´è¦å®‰å…¨ï¼Œè¿™æ¬¾ã€åä¸ºâ€œè¶èˆžâ€çš„NEOKA-V9100æ™ºèƒ½è¿åŠ¨æ‰‹çŽ¯ä¸ºâ€œå®‰å…¨è¿åŠ¨è€Œç”Ÿâ€ã€‚</p>
+            <p><a class="btn btn-default" href="project.html" role="button">é¡¹ç›®è¯¦æƒ… &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" src="img/p3.png" alt="Generic placeholder image"
                  style="width: 140px; height: 140px;">
-            <h2>ÇýÎÃ¿Û</h2>
-            <p>Ëæ´¦Ê¹ÓÃµÄÇýÎÃÅ¦¿Û£¬<br>½â¾öÏÄ¼¾ÎÃ³æÎÊÌâ¡£</p>
-            <p><a class="btn btn-default" href="project.html" role="button">ÏîÄ¿ÏêÇé &raquo;</a></p>
+            <h2>é©±èšŠæ‰£</h2>
+            <p>éšå¤„ä½¿ç”¨çš„é©±èšŠçº½æ‰£ï¼Œ<br>è§£å†³å¤å­£èšŠè™«é—®é¢˜ã€‚</p>
+            <p><a class="btn btn-default" href="project.html" role="button">é¡¹ç›®è¯¦æƒ… &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
@@ -296,10 +297,10 @@
                 <div class="box ui-draggable" id="mainBox">
                     <div class="mHd" style="">
                         <div class="path">
-                            <a href="projects.html">¸ü¶à...</a>
+                            <a href="projects.html">æ›´å¤š...</a>
                         </div>
                         <h3>
-                            ¿Æ¼¼ <small style="color:#FFF;">¿ªÆôÖÇ»ÛÎ´À´</small>
+                            ç§‘æŠ€ <small style="color:#FFF;">å¼€å¯æ™ºæ…§æœªæ¥</small>
                         </h3>
                     </div>
                     <div class="mBd" style="padding-top:10px;">
@@ -309,13 +310,13 @@
                                     <img alt="300x200" src="img/product-1.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">»îÐÔ¸»Çâ¾»Ë®Ö±Òû»ú</a>
+                                            <a href="project.html">æ´»æ€§å¯Œæ°¢å‡€æ°´ç›´é¥®æœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -330,7 +331,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -339,13 +340,13 @@
                                     <img alt="300x200" src="img/product-2.gif"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">¿á³Û´¥¿ØÁúÍ·£¬ÖÇÏí³ø·¿ºÚ¿Æ¼¼</a>
+                                            <a href="project.html">é…·é©°è§¦æŽ§é¾™å¤´ï¼Œæ™ºäº«åŽ¨æˆ¿é»‘ç§‘æŠ€</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -360,7 +361,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -369,13 +370,13 @@
                                     <img alt="300x200" src="img/product-3.png"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ð¡ÐÜÃ¨ÓãÑÛÈ«¾°°²·ÀÉãÏñ»ú</a>
+                                            <a href="project.html">å°ç†ŠçŒ«é±¼çœ¼å…¨æ™¯å®‰é˜²æ‘„åƒæœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -390,7 +391,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -399,13 +400,13 @@
                                     <img alt="300x200" src="img/product-4.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ò»¿î¾«ÖÂµÄ»úÐµ±í</a>
+                                            <a href="project.html">ä¸€æ¬¾ç²¾è‡´çš„æœºæ¢°è¡¨</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -420,7 +421,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -438,10 +439,10 @@
                 <div class="box ui-draggable" id="mainBox">
                     <div class="mHd" style="">
                         <div class="path">
-                            <a href="projects.html">¸ü¶à...</a>
+                            <a href="projects.html">æ›´å¤š...</a>
                         </div>
                         <h3>
-                            Éè¼Æ <small style="color:#FFF;">´´Òâ¸Ä±äÉú»î</small>
+                            è®¾è®¡ <small style="color:#FFF;">åˆ›æ„æ”¹å˜ç”Ÿæ´»</small>
                         </h3>
                     </div>
                     <div class="mBd" style="padding-top:10px;">
@@ -451,13 +452,13 @@
                                     <img alt="300x200" src="img/product-5.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">»îÐÔ¸»Çâ¾»Ë®Ö±Òû»ú</a>
+                                            <a href="project.html">æ´»æ€§å¯Œæ°¢å‡€æ°´ç›´é¥®æœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -472,7 +473,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -481,13 +482,13 @@
                                     <img alt="300x200" src="img/product-6.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">¿á³Û´¥¿ØÁúÍ·£¬ÖÇÏí³ø·¿ºÚ¿Æ¼¼</a>
+                                            <a href="project.html">é…·é©°è§¦æŽ§é¾™å¤´ï¼Œæ™ºäº«åŽ¨æˆ¿é»‘ç§‘æŠ€</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -502,7 +503,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -511,13 +512,13 @@
                                     <img alt="300x200" src="img/product-7.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ð¡ÐÜÃ¨ÓãÑÛÈ«¾°°²·ÀÉãÏñ»ú</a>
+                                            <a href="project.html">å°ç†ŠçŒ«é±¼çœ¼å…¨æ™¯å®‰é˜²æ‘„åƒæœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -532,7 +533,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -541,13 +542,13 @@
                                     <img alt="300x200" src="img/product-8.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ò»¿î¾«ÖÂµÄ»úÐµ±í</a>
+                                            <a href="project.html">ä¸€æ¬¾ç²¾è‡´çš„æœºæ¢°è¡¨</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -562,7 +563,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -580,10 +581,10 @@
                 <div class="box ui-draggable" id="mainBox">
                     <div class="mHd" style="">
                         <div class="path">
-                            <a href="projects.html">¸ü¶à...</a>
+                            <a href="projects.html">æ›´å¤š...</a>
                         </div>
                         <h3>
-                            Å©Òµ <small style="color:#FFF;">ÍøÂçÌìÏÂ·ÊÃÀ</small>
+                            å†œä¸š <small style="color:#FFF;">ç½‘ç»œå¤©ä¸‹è‚¥ç¾Ž</small>
                         </h3>
                     </div>
                     <div class="mBd" style="padding-top:10px;">
@@ -593,13 +594,13 @@
                                     <img alt="300x200" src="img/product-9.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">»îÐÔ¸»Çâ¾»Ë®Ö±Òû»ú</a>
+                                            <a href="project.html">æ´»æ€§å¯Œæ°¢å‡€æ°´ç›´é¥®æœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -614,7 +615,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -623,13 +624,13 @@
                                     <img alt="300x200" src="img/product-2.gif"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">¿á³Û´¥¿ØÁúÍ·£¬ÖÇÏí³ø·¿ºÚ¿Æ¼¼</a>
+                                            <a href="project.html">é…·é©°è§¦æŽ§é¾™å¤´ï¼Œæ™ºäº«åŽ¨æˆ¿é»‘ç§‘æŠ€</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -644,7 +645,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -653,13 +654,13 @@
                                     <img alt="300x200" src="img/product-3.png"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ð¡ÐÜÃ¨ÓãÑÛÈ«¾°°²·ÀÉãÏñ»ú</a>
+                                            <a href="project.html">å°ç†ŠçŒ«é±¼çœ¼å…¨æ™¯å®‰é˜²æ‘„åƒæœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -674,7 +675,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -683,13 +684,13 @@
                                     <img alt="300x200" src="img/product-4.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ò»¿î¾«ÖÂµÄ»úÐµ±í</a>
+                                            <a href="project.html">ä¸€æ¬¾ç²¾è‡´çš„æœºæ¢°è¡¨</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -704,7 +705,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -722,10 +723,10 @@
                 <div class="box ui-draggable" id="mainBox">
                     <div class="mHd" style="">
                         <div class="path">
-                            <a href="projects.html">¸ü¶à...</a>
+                            <a href="projects.html">æ›´å¤š...</a>
                         </div>
                         <h3>
-                            ÆäËû <small style="color:#FFF;">·¢ÏÖ¸ü¶à¾ªÏ²</small>
+                            å…¶ä»– <small style="color:#FFF;">å‘çŽ°æ›´å¤šæƒŠå–œ</small>
                         </h3>
                     </div>
                     <div class="mBd" style="padding-top:10px;">
@@ -735,13 +736,13 @@
                                     <img alt="300x200" src="img/product-1.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">»îÐÔ¸»Çâ¾»Ë®Ö±Òû»ú</a>
+                                            <a href="project.html">æ´»æ€§å¯Œæ°¢å‡€æ°´ç›´é¥®æœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -756,7 +757,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -765,13 +766,13 @@
                                     <img alt="300x200" src="img/product-2.gif"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">¿á³Û´¥¿ØÁúÍ·£¬ÖÇÏí³ø·¿ºÚ¿Æ¼¼</a>
+                                            <a href="project.html">é…·é©°è§¦æŽ§é¾™å¤´ï¼Œæ™ºäº«åŽ¨æˆ¿é»‘ç§‘æŠ€</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -786,7 +787,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -795,13 +796,13 @@
                                     <img alt="300x200" src="img/product-3.png"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ð¡ÐÜÃ¨ÓãÑÛÈ«¾°°²·ÀÉãÏñ»ú</a>
+                                            <a href="project.html">å°ç†ŠçŒ«é±¼çœ¼å…¨æ™¯å®‰é˜²æ‘„åƒæœº</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -816,7 +817,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -825,13 +826,13 @@
                                     <img alt="300x200" src="img/product-4.jpg"/>
                                     <div class="caption">
                                         <h3 class="break">
-                                            <a href="project.html">Ò»¿î¾«ÖÂµÄ»úÐµ±í</a>
+                                            <a href="project.html">ä¸€æ¬¾ç²¾è‡´çš„æœºæ¢°è¡¨</a>
                                         </h3>
                                         <p>
                                         <div style="float:left;"><i class="glyphicon glyphicon-screenshot"
-                                                                    title="Ä¿±ê½ð¶î"></i> $20,000
+                                                                    title="ç›®æ ‡é‡‘é¢"></i> $20,000
                                         </div>
-                                        <div style="float:right;"><i title="½ØÖÁÈÕÆÚ"
+                                        <div style="float:right;"><i title="æˆªè‡³æ—¥æœŸ"
                                                                      class="glyphicon glyphicon-calendar"></i>
                                             2017-20-20
                                         </div>
@@ -846,7 +847,7 @@
                                         </div>
                                         <div><span style="float:right;"><i
                                                 class="glyphicon glyphicon-star-empty"></i></span> <span><i
-                                                class="glyphicon glyphicon-user" title="Ö§³ÖÈËÊý"></i> 12345</span></div>
+                                                class="glyphicon glyphicon-user" title="æ”¯æŒäººæ•°"></i> 12345</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -864,14 +865,14 @@
             <div class="col-md-12 column">
                 <div id="footer">
                     <div class="footerNav">
-                        <a rel="nofollow" href="http://www.atguigu.com">¹ØÓÚÎÒÃÇ</a> | <a rel="nofollow"
-                                                                                      href="http://www.atguigu.com">·þÎñÌõ¿î</a>
-                        | <a rel="nofollow" href="http://www.atguigu.com">ÃâÔðÉùÃ÷</a> | <a rel="nofollow"
-                                                                                        href="http://www.atguigu.com">ÍøÕ¾µØÍ¼</a>
-                        | <a rel="nofollow" href="http://www.atguigu.com">ÁªÏµÎÒÃÇ</a>
+                        <a rel="nofollow" href="http://www.atguigu.com">å…³äºŽæˆ‘ä»¬</a> | <a rel="nofollow"
+                                                                                      href="http://www.atguigu.com">æœåŠ¡æ¡æ¬¾</a>
+                        | <a rel="nofollow" href="http://www.atguigu.com">å…è´£å£°æ˜Ž</a> | <a rel="nofollow"
+                                                                                        href="http://www.atguigu.com">ç½‘ç«™åœ°å›¾</a>
+                        | <a rel="nofollow" href="http://www.atguigu.com">è”ç³»æˆ‘ä»¬</a>
                     </div>
                     <div class="copyRight">
-                        Copyright ?2017-2017atguigu.com °æÈ¨ËùÓÐ
+                        Copyright ?2017-2017atguigu.com ç‰ˆæƒæ‰€æœ‰
                     </div>
                 </div>
 

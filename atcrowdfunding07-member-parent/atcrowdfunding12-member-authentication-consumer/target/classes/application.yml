@@ -6,6 +6,7 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+    mode: HTML
 eureka:
   client:
     service-url:
